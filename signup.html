@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Students - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-yellow-400 to-yellow-500 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-10 rounded-xl shadow-xl w-96">
+        <h1 class="text-3xl font-bold mb-2 flex items-center">
+            <span class="border-l-4 border-yellow-500 mr-2 h-6"></span> Admin Students
+        </h1>
+        <h2 class="text-xl font-semibold text-center mb-4">SIGN UP</h2>
+        <p class="text-gray-500 text-center mb-6">Enter your credentials to access your account</p>
+        
+        <label class="block text-gray-700 font-semibold">Enter new login</label>
+        <input id="new-login" type="text" placeholder="Enter your login" class="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        
+        <label class="block text-gray-700 font-semibold">Create new password</label>
+        <input id="new-password" type="password" placeholder="Enter your password" class="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        
+        <button onclick="handleSignUp()" class="w-full bg-yellow-500 text-white p-3 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition">SIGN UP</button>
+    </div>
+
+    <script>
+        function handleSignUp() {
+            const login = document.getElementById('new-login').value;
+            const password = document.getElementById('new-password').value;
+            
+            if (login && password) {
+                alert("Account created successfully!");
+                window.location.href = "index.html";
+            } else {
+                alert("Please enter both login and password");
+            }
+        }
+    </script>
+</body>
+</html>

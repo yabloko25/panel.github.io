@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .sidebar {
+            background-color: #F2EAE1;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+        }
+        .avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar p-5">
+        <img src="./Logo.svg" alt="Logo" class="w-[183.5px] h-[24px] mb-5">
+        <div class="text-center">
+            <img src="pexels-photo-2379004 1.svg" alt="Profile Picture" class="w-[100px] h-[100px] rounded-full mx-auto">
+            <h2 class="text-black font-semibold text-lg mt-3">Karthi Madesh</h2>
+            <p class="text-gray-600">Admin</p>
+        </div>
+        <button class="bg-[#FEAF00] text-white w-[193px] h-[41px] rounded mt-5">Students</button>
+        <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex items-center space-x-2">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828427.png" alt="Logout Icon" class="w-5 h-5">
+            <span class="text-[#FEAF00] cursor-pointer" onclick="logout()">Logout</span>
+        </div>
+    </div>
+
+    <div class="ml-[250px] p-5">
+        <div class="flex justify-between items-center">
+            <h1 class="text-black font-bold text-2xl">Students List</h1>
+            <div class="flex items-center space-x-3">
+                <input type="text" placeholder="Search..." class="border rounded px-3 py-2 w-[212px]" id="searchInput">
+                <img src="https://cdn-icons-png.flaticon.com/512/54/54481.png" class="w-5 h-5">
+                <button class="bg-[#FEAF00] text-white px-4 py-2 rounded" onclick="openModal()">ADD NEW STUDENT</button>
+            </div>
+        </div>
+
+        <table class="mt-5 w-full border">
+            <thead>
+                <tr class="bg-gray-200 text-left">
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Email</th>
+                    <th class="p-2">Phone</th>
+                    <th class="p-2">Enroll Number</th>
+                    <th class="p-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTable">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-5 rounded w-96">
+            <h2 class="text-xl font-bold mb-3">Add New Student</h2>
+            <input id="name" type="text" placeholder="Name" class="w-full border p-2 mb-2">
+            <input id="email" type="text" placeholder="Email" class="w-full border p-2 mb-2">
+            <input id="phone" type="text" placeholder="Phone" class="w-full border p-2 mb-2">
+            <input id="enroll" type="text" placeholder="Enroll Number" class="w-full border p-2 mb-2">
+            <input id="avatar" type="file" class="w-full border p-2 mb-2">
+            <div class="flex justify-between">
+                <button class="bg-gray-400 text-white px-4 py-2 rounded" onclick="closeModal()">Cancel</button>
+                <button class="bg-[#FEAF00] text-white px-4 py-2 rounded" onclick="addStudent()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function addStudent() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const enroll = document.getElementById('enroll').value;
+            const avatarInput = document.getElementById('avatar');
+
+            if (!name || !email || !phone || !enroll || !avatarInput.files.length) {
+                alert("Please fill in all fields and select an avatar.");
+                return;
+            }
+
+            const avatar = URL.createObjectURL(avatarInput.files[0]);
+
+            const table = document.getElementById('studentsTable');
+            const row = document.createElement('tr');
+            row.classList.add('border');
+
+            row.innerHTML = `
+                <td class="p-2 flex items-center">
+                    <img src="${avatar}" class="avatar mr-3">${name}
+                </td>
+                <td class="p-2">${email}</td>
+                <td class="p-2">${phone}</td>
+                <td class="p-2">${enroll}</td>
+                <td class="p-2">
+                    <button onclick="deleteStudent(this)">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" class="w-5 h-5">
+                    </button>
+                </td>
+            `;
+
+            table.appendChild(row);
+            closeModal();
+        }
+
+        function deleteStudent(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+        function logout() {
+            window.location.href = 'login.html';
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'index.html';
+    }
+
+    function logout() {
+        localStorage.removeItem('isLoggedIn'); 
+        window.location.href = 'index.html'; 
+    }
+
+
+        }
+
+    </script>
+</body>
+</html>

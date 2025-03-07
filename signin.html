@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Students</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-yellow-400 to-yellow-500 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-10 rounded-xl shadow-xl w-96">
+        <h1 class="text-3xl font-bold mb-2 flex items-center">
+            <span class="border-l-4 border-yellow-500 mr-2 h-6"></span> Admin Students
+        </h1>
+        <h2 class="text-xl font-semibold text-center mb-4">SIGN IN</h2>
+        <p class="text-gray-500 text-center mb-6">Enter your credentials to access your account</p>
+        
+        <label class="block text-gray-700 font-semibold">Login</label>
+        <input id="login" type="text" placeholder="Enter your login" class="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        
+        <label class="block text-gray-700 font-semibold">Password</label>
+        <input id="password" type="password" placeholder="Enter your password" class="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        
+        <button onclick="handleLogin()" class="w-full bg-yellow-500 text-white p-3 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition">SIGN IN</button>
+        
+        <p class="text-center mt-4 text-gray-500 cursor-pointer hover:text-yellow-600 transition" onclick="goToSignUp()">Sign up</p>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            
+            if (login === "admin" && password === "1234") {
+                localStorage.setItem('isLoggedIn', 'true'); 
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Invalid login or password");
+            }
+        }
+
+        function goToSignUp() {
+            window.location.href = "signup.html";
+        }
+
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
+</html>
